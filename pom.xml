@@ -91,6 +91,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>user-tracking</finalName>
 	</build>
 	<repositories>
 		<repository>
