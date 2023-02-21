@@ -52,6 +52,16 @@ public class UserController {
             List<Activity> activities = userService.getAllUserActivities();
             return ResponseEntity.ok(activities);
         } catch (Exception e) {
+            return new ResponseEntity<>("Error getting activities: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("logout")
+    public ResponseEntity<?> logout() {
+        try {
+            userService.logout();
+            return new ResponseEntity<>("Logged Out Successfully", HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>("Error getting users: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

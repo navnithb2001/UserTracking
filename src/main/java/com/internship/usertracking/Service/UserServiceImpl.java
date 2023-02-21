@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             username = jwtTokenUtil.extractUsername(jwtToken);
         }
         User user = userRepository.findByUsername(username);
-        return user.getActivities();
+        List<Activity> activities = user.getActivities();
+        LocalDateTime loginTime = activities.get(activities.size()-1).getLoginTime();
+        activities.get(activities.size()-1).setSesstionTime(Duration.between(loginTime, LocalDateTime.now()).toMinutes());
+        user.setActivities(activities);
+        return activities;
     }
 
     @Override
@@ -142,6 +147,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         authorities.add(new SimpleGrantedAuthority("USER"));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 authorities);
+    }
+
+    @Override
+    public void logout() {
+        getAllUserActivities();
     }
 
 }
