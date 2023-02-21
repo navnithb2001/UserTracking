@@ -62,7 +62,7 @@ public class UserController {
             userService.logout();
             return new ResponseEntity<>("Logged Out Successfully", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error getting users: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error logging out: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
