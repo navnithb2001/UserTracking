@@ -55,14 +55,4 @@ public class UserController {
             return new ResponseEntity<>("Error getting activities: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("logout")
-    public ResponseEntity<?> logout() {
-        try {
-            userService.logout();
-            return new ResponseEntity<>("Logged Out Successfully", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error logging out: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }
