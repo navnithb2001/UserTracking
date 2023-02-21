@@ -56,7 +56,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("logout")
+    @GetMapping("logout")
     public ResponseEntity<?> logout() {
         try {
             userService.logout();
