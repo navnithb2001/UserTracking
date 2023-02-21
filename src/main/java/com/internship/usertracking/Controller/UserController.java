@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.internship.usertracking.Entity.Activity;
@@ -48,9 +47,9 @@ public class UserController {
     }
     
     @GetMapping("activities")
-    public ResponseEntity<?> getAllUserActivities(@RequestParam String username) {
+    public ResponseEntity<?> getAllUserActivities() {
         try {
-            List<Activity> activities = userService.getAllUserActivities(username);
+            List<Activity> activities = userService.getAllUserActivities();
             return ResponseEntity.ok(activities);
         } catch (Exception e) {
             return new ResponseEntity<>("Error getting users: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

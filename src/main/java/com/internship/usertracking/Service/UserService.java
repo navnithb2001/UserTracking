@@ -11,5 +11,5 @@ public interface UserService {
 
     String loginUser(String username, String password);
 
-    List<Activity> getAllUserActivities(String username);
+    List<Activity> getAllUserActivities();
 }

@@ -118,7 +118,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<Activity> getAllUserActivities(String username) {
+    public List<Activity> getAllUserActivities() {
+        final String authorizationHeader = request.getHeader("Authorization");
+
+        String username = null;
+        String jwtToken = null;
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            jwtToken = authorizationHeader.substring(7);
+            username = jwtTokenUtil.extractUsername(jwtToken);
+        }
         User user = userRepository.findByUsername(username);
         return user.getActivities();
     }
