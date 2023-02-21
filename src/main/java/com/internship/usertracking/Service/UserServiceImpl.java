@@ -134,6 +134,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         LocalDateTime loginTime = activities.get(activities.size()-1).getLoginTime();
         activities.get(activities.size()-1).setSesstionTime(Duration.between(loginTime, LocalDateTime.now()).toMinutes());
         user.setActivities(activities);
+        userRepository.save(user);
         return activities;
     }
 
